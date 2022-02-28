@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/bulma.min.css') }}">
+    <title>Vuln Python App</title>
+</head>
+<body>
+    {% include "./components/navbar.html" %}
+    <section class="section">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='assets/axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/global.js') }}"></script>
+    <script>
+        // var googleCaptchaKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+        // var googleCatpchaSecretKey = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
+        var googleCaptchaKey = '{{ GOOGLE_RECAPTCHA_SITE_KEY }}';
+        var googleCatpchaSecretKey = '{{ GOOGLE_RECAPTCHA_SECRET_KEY }}';
+
+    </script>
+
+    {% block js %}{% endblock %}
+</body>
+</html>

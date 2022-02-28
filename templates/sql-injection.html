@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">SQL Injection</h1>
+
+  <div class="block">
+    <pre>
+        Search: {{ search }}
+
+        Executed Query: {{ sql }}
+    </pre>
+  </div>
+
+  <div class="block">
+    <h2 class="subtitle">Products Found</h2>
+    <div class="content">
+      <table class="table">
+        <thead>
+          <td>ID</td>
+          <td>NAME</td>
+          <td>PRICE</td>
+        </thead>
+        <tbody>
+        {% for product in products %}
+          <tr>
+            <td>{{ product['id'] }}</td>
+            <td>{{ product['name'] }}</td>
+            <td>{{ product['price'] }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <ul>
+        
+      </ul>
+    </div>
+  </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">Welcome to Vulnerable Python/Flask WebApp</h1>
+
+  <p class="subtitle">
+      This application contains some vulnerabilities hardcoded to be used as a PoC for SAST solutions.
+  </p>
+</section>
+{% endblock %}
+
+
+{% block js %}
+
+<script>
+  if (urlParams.reset_db) {
+    alert('Database has been reseted!')
+  }
+</script>
+
+{% endblock %}

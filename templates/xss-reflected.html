@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">XSS - Reflected</h1>
+
+  <p>
+      Result for query <i>search</i>:
+      
+      {% autoescape false %}
+        {{ request.args.get('search') }}
+      {% endautoescape %}
+  </p>
+</section>
+{% endblock %}

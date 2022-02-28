@@ -1,0 +1,41 @@
+name: ViaOps CI
+on:
+  push:
+  workflow_dispatch:
+
+# Variáveis
+env:
+  NAMESPACE_PREFIX: "adlm-dummy"
+  PROJECT_NAME: "reference-blank"
+  APPLICATION_NAMES: "reference-blank"
+  SQUAD_NAME: "ADLM DevOps"
+  SERVICE_NOW_CI: "SYS-ID" # CHANGE THIS TO THE SYS-ID OF SERVICENOW!! (You can get this info from ViaOps)
+  DEPLOYMENT_STRATEGY: "aks"
+  HARBOR_PROJECT_NAME: "adlm-dummy"
+  SOURCE_REGISTRY: "harbor01.viavarejo.com.br"
+
+jobs:
+  pipeline:
+    name: Continuous Integration Pipeline
+    runs-on: self-hosted
+    steps:
+
+    # Getting the current branch of this repo.
+    # We need to checkout the current repository FIRST!
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    # Getting all actions available from Convair Actions
+    - name: Checkout Convair Actions
+      uses: actions/checkout@v2
+      with:
+        repository: viavarejo-internal/convair-actions
+        token: ${{ secrets.ACTIONS_TOKEN }}
+        path: ./.convair-actions
+        ref: main  # not required, but can be override to another branch for testing purposes
+
+    # Using one of the actions from Convair
+    - name: Define Branch Type
+      uses: ./.convair-actions/define-type

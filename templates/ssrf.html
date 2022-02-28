@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">SSRF</h1>
+
+  <div class="block">
+    <pre>
+        Profile Picture URL: {{ profile_picture_url }}
+    </pre>
+  </div>
+
+  <div class="block">
+    <img src="{{ profile_picture_url }}" alt="">
+  </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">XSS - Stored</h1>
+
+    <div class="block">
+
+  <h2 class="subtitle">Send Message</h2>
+  <form action="/xss/stored" method="post">
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" id="message" name="message" required minlength="3">
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" type="submit">Submit</button>
+        </div>
+      </div>
+  </form>
+</div>
+
+<div class="block">
+
+  <h2 class="subtitle">Messages</h2>
+  <div class="content">
+    <ul>
+        {% autoescape false %}
+            {% for msg in messages %}
+                <li>
+                    <td>{{ msg }}</td>
+                </li>
+            {% endfor %}
+        {% endautoescape %}
+    </ul>
+  </div>
+</div>
+</section>
+{% endblock %}
