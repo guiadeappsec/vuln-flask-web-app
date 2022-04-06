@@ -4,9 +4,22 @@
 <section class="section">
   <h1 class="title">SSRF</h1>
 
+
+  <div class="block">
+    <form action="/ssrf" method="post" style="max-width: 400px;">
+      <input class="input" type="email" name="email" id="email" placeholder="E-mail" required>
+      <input class="input" type="text" name="name" id="name" placeholder="name" required>
+      <input class="input" type="url" name="imageUrl" id="imageUrl" placeholder="Profile Picture Url" required>
+      <input class="button" type="submit" value="Send">
+    </form>
+  </div>
+
   <div class="block">
     <pre>
-        Profile Picture URL: {{ profile_picture_url }}
+        Email: {{ email }}
+        Name: {{ name }}
+        Original URL: {{ original_url }}
+        Local URL: {{ profile_picture_url }}
     </pre>
   </div>
 
