@@ -63,14 +63,18 @@ GOOGLE_RECAPTCHA_SECRET_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 ### SQL Injection
 
-URL: http://localhost:5000/sql-injection?search=uno
+URL: http://localhost:5000/sql-injection
 
 ```py
-# vulns/sqlinjection/sql_injection.py line 6
+# vulns/sqlinjection/sql_injection.py
 
-search = request.args.get('search')
-sql = f"SELECT * FROM products WHERE name LIKE '%{search}%'"
-products = app.db_helper.execute_read(sql)
+username = form.get('username')
+password = form.get('password')
+password_hash = _hash_password(password)
+
+sql = f"SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
+
+db_result = app.db_helper.execute_read(sql)
 ```
 
 

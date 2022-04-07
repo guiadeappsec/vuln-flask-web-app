@@ -52,7 +52,7 @@ def file_upload():
 
 @app.route('/xss/reflected', methods=['GET'])
 def xss_reflected():
-    return xss_reflected_page(request)
+    return xss_reflected_page(request, app)
 
 
 @app.route('/xss/stored', methods=['GET', 'POST'])
