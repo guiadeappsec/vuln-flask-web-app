@@ -17,9 +17,20 @@
         Home
       </a>
 
-      <a class="navbar-item" href="{{ url_for('sql_injection') }}">
-        SQL Injection
-      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          SQL Injection
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="{{ url_for('sql_injection_login') }}">
+            Login
+          </a>
+          <a class="navbar-item" href="{{ url_for('sql_injection_search') }}?q=">
+            Search
+          </a>
+        </div>
+      </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">

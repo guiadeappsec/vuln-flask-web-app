@@ -2,15 +2,15 @@ from flask import render_template
 import hashlib
 
 
-def sql_injection_page(request, app):
+def sql_injection_login_page(request, app):
     return render_template(
-        'sql-injection.html',
+        'sql_injection/login.html',
         sql='',
         logged=None
     )
 
 
-def sql_injection_api(request, app):
+def sql_injection_login_api(request, app):
     form = request.form
 
     username = form.get('username')
@@ -33,7 +33,7 @@ def sql_injection_api(request, app):
     )[0] if len(db_result) > 0 else None
 
     return render_template(
-        'sql-injection.html',
+        'sql_injection/login.html',
         sql=sql,
         logged=user is not None
     )

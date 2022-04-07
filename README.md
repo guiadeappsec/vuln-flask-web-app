@@ -63,10 +63,10 @@ GOOGLE_RECAPTCHA_SECRET_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 ### SQL Injection
 
-URL: http://localhost:5000/sql-injection
+URL: http://localhost:5000/sql-injection/login
 
 ```py
-# vulns/sqlinjection/sql_injection.py
+# vulns/sql_injection/sql_injection_login.py
 
 username = form.get('username')
 password = form.get('password')
@@ -77,6 +77,17 @@ sql = f"SELECT * FROM users WHERE username='{username}' AND password='{password_
 db_result = app.db_helper.execute_read(sql)
 ```
 
+URL: http://localhost:5000/sql-injection/search
+
+```py
+# vulns/sql_injection/sql_injection_search.py
+
+search = request.args.get('q')
+
+sql = f"SELECT * FROM products WHERE name LIKE '%{search}%'"
+
+db_result = app.db_helper.execute_read(sql)
+```
 
 ### XSS
 
