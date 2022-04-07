@@ -6,36 +6,46 @@
 
   <div class="block">
     <pre>
-        Search: {{ search }}
-
-        Executed Query: {{ sql }}
+        Username: admin
+        Password: Admin123
     </pre>
+    <code lang="sql">
+        {{ sql }}
+    </code>
   </div>
 
   <div class="block">
-    <h2 class="subtitle">Products Found</h2>
-    <div class="content">
-      <table class="table">
-        <thead>
-          <td>ID</td>
-          <td>NAME</td>
-          <td>PRICE</td>
-        </thead>
-        <tbody>
-        {% for product in products %}
-          <tr>
-            <td>{{ product['id'] }}</td>
-            <td>{{ product['name'] }}</td>
-            <td>{{ product['price'] }}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      <ul>
-        
-      </ul>
-    </div>
+    <form action="/sql-injection" method="post" style="max-width: 300px;">
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input" name="username" type="text" placeholder="myuser" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" name="password" type="password" placeholder="********" required>
+        </div>
+      </div>
+      
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link">Signin</button>
+        </div>
+      </div>
+      {% if logged == True %}
+        <div class="notification is-success">
+          Login successful!
+        </div>
+      {% elif logged == False %}
+        <div class="notification is-danger">
+          Invalid Credentials
+        </div>
+      {% elif logged == None %}
+      {% endif %}
+    </form>
+    
   </div>
-
 </section>
 {% endblock %}

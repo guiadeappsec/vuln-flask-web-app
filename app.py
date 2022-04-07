@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from vulns.sqlinjection.sql_injection import sql_injection_page
+from vulns.sqlinjection.sql_injection import sql_injection_page, sql_injection_api
 from vulns.file_upload.file_upload import file_upload_page, file_upload_api
 from vulns.xssinjection.xss_reflected import xss_reflected_page
 from vulns.xssinjection.xss_stored import xss_stored_page, xss_stored_api
@@ -34,9 +34,12 @@ def reset_database():
     return redirect(url_for('home', reset_db=1))
 
 
-@app.route('/sql-injection')
+@app.route('/sql-injection', methods=['GET', 'POST'])
 def sql_injection():
-    return sql_injection_page(request, app)
+    if request.method == 'GET':
+        return sql_injection_page(request, app)
+
+    return sql_injection_api(request, app)
 
 
 @app.route('/file-upload', methods=['GET', 'POST'])

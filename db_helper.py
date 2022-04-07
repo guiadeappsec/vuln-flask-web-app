@@ -70,12 +70,16 @@ class DbHelper:
             con = self._get_db_connection()
             cur = con.cursor()
 
-            cur.execute('CREATE TABLE users (id integer, email text, password text)')
+            cur.execute('CREATE TABLE users (id integer, username text, password text)')
+            cur.execute('INSERT INTO users VALUES (1, "admin", "e64b78fc3bc91bcbc7dc232ba8ec59e0")')
+            
             cur.execute('CREATE TABLE messages (message text)')
             cur.execute('INSERT INTO messages (message) VALUES ("This is vulnerable to stored xss")')
+            
             cur.execute('CREATE TABLE products (id integer, name text, value real)')
             cur.execute('INSERT INTO products VALUES (1, "Uno", 9.99)')
             cur.execute('INSERT INTO products VALUES (2, "Sword", 749.50)')
+            
             con.commit()
             con.close()
         finally:

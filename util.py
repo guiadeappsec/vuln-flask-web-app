@@ -9,3 +9,4 @@ def get_root_dir():
 def get_uploads_folder_url():
     return url_for('static', filename='uploads')
     
+
