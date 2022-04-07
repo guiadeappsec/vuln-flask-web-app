@@ -26,15 +26,15 @@
 
   <h2 class="subtitle">Messages</h2>
   <div class="content">
-    <ul>
-        {% autoescape false %}
-            {% for msg in messages %}
-                <li>
-                    <td>{{ msg }}</td>
-                </li>
-            {% endfor %}
-        {% endautoescape %}
-    </ul>
+    {% autoescape false %}
+        {% for msg in messages %}
+            <article class="message">
+              <div class="message-body">
+                {{ msg }}
+              </div>
+            </article>
+        {% endfor %}
+    {% endautoescape %}
   </div>
 </div>
 </section>
