@@ -24,7 +24,7 @@ docker run -it -p 5000:5000 --rm --name poc-sast-python-flask poc-sast-python-fl
 ```
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+sh setup.sh
 sh run.sh
 ```
 
