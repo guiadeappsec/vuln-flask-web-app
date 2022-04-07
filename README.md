@@ -133,14 +133,12 @@ def _validate_file(filename):
 
 ### Insecure Crypto
 
-URL: http://localhost:5000/insecure-crypto
-
-
 ```py
-# vulns/insecure_crypto/insecure_crypto.py
+# vulns/sqlinjection/sql_injection.py
 
-hash_pass = hashlib.md5(password.encode())
-hash_text = hash_pass.hexdigest()
+def _hash_password(password):
+    md5_pass = hashlib.md5(password.encode('utf-8')).hexdigest()
+    return md5_pass
 ```
 
 ### SSRF

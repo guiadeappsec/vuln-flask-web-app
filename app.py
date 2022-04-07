@@ -3,7 +3,6 @@ from vulns.sqlinjection.sql_injection import sql_injection_page, sql_injection_a
 from vulns.file_upload.file_upload import file_upload_page, file_upload_api
 from vulns.xssinjection.xss_reflected import xss_reflected_page
 from vulns.xssinjection.xss_stored import xss_stored_page, xss_stored_api
-from vulns.insecure_crypto.insecure_crypto import insecure_crypto_api, insecure_crypto_page
 from vulns.ssrf.ssrf import ssrf_page, ssrf_api
 from vulns.path_traversal.path_traversal import path_traversal_page, path_traversal_image
 from util import get_root_dir
@@ -61,14 +60,6 @@ def xss_stored():
         return xss_stored_page(request, app)
 
     return xss_stored_api(request, app)
-
-
-@app.route('/insecure-crypto', methods=['GET', 'POST'])
-def insecure_crypto():
-    if request.method == 'GET':
-        return insecure_crypto_page(request, app)
-
-    return insecure_crypto_api(request, app)
 
 
 @app.route('/ssrf', methods=['GET', 'POST'])
