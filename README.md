@@ -12,10 +12,10 @@
 
 ```sh
 # building
-docker build -t poc-sast-python-flask .
+docker build -t vuln-flask-web-app .
 
 # running
-docker run -it -p 5000:5000 --rm --name poc-sast-python-flask poc-sast-python-flask
+docker run -it -p 5000:5000 --rm --name vuln-flask-web-app vuln-flask-web-app
 ```
 
 
