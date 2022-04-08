@@ -5,7 +5,8 @@ def xss_reflected_page(request, app):
     search = request.args.get('search')
 
     products = app.db_helper.execute_read(
-        f"SELECT * FROM products WHERE name LIKE '%{search}%'"
+        f"SELECT * FROM products WHERE name LIKE :search",
+        { 'search': f'%{search}%' }
     )
 
     products = list(
