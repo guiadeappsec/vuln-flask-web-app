@@ -7,7 +7,31 @@
 * Docker (if want to run in a container)
 
 
-### Restricting Access (optional)
+### Running
+
+#### Run in Docker
+
+```sh
+# building
+docker build -t vuln-flask-web-app .
+
+# running
+docker run -it -p 5000:5000 --rm --name vuln-flask-web-app vuln-flask-web-app
+```
+
+
+#### Run Local
+
+```
+python3 -m venv venv
+source venv/bin/activate
+sh setup.sh
+sh run.sh
+```
+
+
+### Options
+#### Restricting Access (optional)
 
 By default, the api key is set to `None` and any request will be allowed.
 
@@ -30,27 +54,7 @@ Cookie: api_key=myapisecret
 ...
 ```
 
-### Running
 
-#### Run in Docker
-
-```sh
-# building
-docker build -t vuln-flask-web-app .
-
-# running
-docker run -it -p 5000:5000 --rm --name vuln-flask-web-app vuln-flask-web-app
-```
-
-
-#### Run Local
-
-```
-python3 -m venv venv
-source venv/bin/activate
-sh setup.sh
-sh run.sh
-```
 
 
 ## Vulns

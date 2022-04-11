@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">IDOR - Profile</h1>
+
+  <div class="block">
+    <pre>
+        Logged User: {{ user.id }} - {{ user.username }}
+    </pre>
+  </div>
+</section>
+{% endblock %}

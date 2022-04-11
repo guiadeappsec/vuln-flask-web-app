@@ -6,8 +6,10 @@ from vulns.xssinjection.xss_reflected import xss_reflected_page
 from vulns.xssinjection.xss_stored import xss_stored_page, xss_stored_api
 from vulns.ssrf.ssrf import ssrf_page, ssrf_api
 from vulns.path_traversal.path_traversal import path_traversal_page, path_traversal_image
+from vulns.idor.idor import idor_login_page, idor_login_api, idor_profile_page
 from util import get_root_dir
 from db_helper import db_helper
+from db_models import db_models
 from middlewares import require_api_key
 
 
@@ -22,12 +24,12 @@ app.config['PUBLIC_UPLOADS_URL'] = f"{app.config['STATIC_BASE_URL']}/uploads"
 
 db_helper.initialize()
 app.db_helper = db_helper
-
+app.db_models = db_models
 
 @app.before_request
 @require_api_key
 def before_request():
-    print("before_request is running!")
+    pass
 
 
 @app.route("/")
@@ -91,3 +93,16 @@ def path_traversal():
 @app.route('/path-traversal-img', methods=['GET'])
 def path_traversal_img():
     return path_traversal_image(request, app)
+
+
+@app.route('/idor/login', methods=['GET', 'POST'])
+def idor_login():
+    if request.method == 'GET':
+        return idor_login_page(request, app)
+
+    return idor_login_api(request, app)
+
+
+@app.route('/idor/profile', methods=['GET'])
+def idor_profile():
+    return idor_profile_page(request, app)

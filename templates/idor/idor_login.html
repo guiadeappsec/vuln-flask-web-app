@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section">
+  <h1 class="title">IDOR - Login</h1>
+
+  <div class="block">
+    <pre>
+        Username: robso
+        Password: robso1980
+    </pre>
+  </div>
+
+  <div class="block">
+    <form action="/idor/login" method="post" style="max-width: 300px;">
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input" name="username" type="text" placeholder="myuser" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" name="password" type="password" placeholder="********" required>
+        </div>
+      </div>
+      
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link">Signin</button>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</section>
+{% endblock %}
