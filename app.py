@@ -24,21 +24,24 @@ db_helper.initialize()
 app.db_helper = db_helper
 
 
-@app.route("/")
+@app.before_request
 @require_api_key
+def before_request():
+    print("before_request is running!")
+
+
+@app.route("/")
 def home():
     return render_template('home.html')
 
 
 @app.route('/reset-database', methods=['POST'])
-@require_api_key
 def reset_database():
     db_helper.reset_database()
     return redirect(url_for('home', reset_db=1))
 
 
 @app.route('/sql-injection/login', methods=['GET', 'POST'])
-@require_api_key
 def sql_injection_login():
     if request.method == 'GET':
         return sql_injection_login_page(request, app)
@@ -47,13 +50,11 @@ def sql_injection_login():
 
 
 @app.route('/sql-injection/search', methods=['GET'])
-@require_api_key
 def sql_injection_search():
     return sql_injection_search_page(request, app)
 
 
 @app.route('/file-upload', methods=['GET', 'POST'])
-@require_api_key
 def file_upload():
     if request.method == 'POST':
         return file_upload_api(request, app)
@@ -62,13 +63,11 @@ def file_upload():
     
 
 @app.route('/xss/reflected', methods=['GET'])
-@require_api_key
 def xss_reflected():
     return xss_reflected_page(request, app)
 
 
 @app.route('/xss/stored', methods=['GET', 'POST'])
-@require_api_key
 def xss_stored():
     if request.method == 'GET':
         return xss_stored_page(request, app)
@@ -77,7 +76,6 @@ def xss_stored():
 
 
 @app.route('/ssrf', methods=['GET', 'POST'])
-@require_api_key
 def ssrf():
     if request.method == 'GET':
         return ssrf_page(request, app)
@@ -86,12 +84,10 @@ def ssrf():
 
 
 @app.route('/path-traversal', methods=['GET'])
-@require_api_key
 def path_traversal():
     return path_traversal_page(request, app)
 
 
 @app.route('/path-traversal-img', methods=['GET'])
-@require_api_key
 def path_traversal_img():
     return path_traversal_image(request, app)
