@@ -8,6 +8,7 @@ from vulns.ssrf.ssrf import ssrf_page, ssrf_api
 from vulns.path_traversal.path_traversal import path_traversal_page, path_traversal_image
 from util import get_root_dir
 from db_helper import db_helper
+from middlewares import require_api_key
 
 
 app = Flask(__name__)
@@ -21,6 +22,12 @@ app.config['PUBLIC_UPLOADS_URL'] = f"{app.config['STATIC_BASE_URL']}/uploads"
 
 db_helper.initialize()
 app.db_helper = db_helper
+
+
+@app.before_request
+@require_api_key
+def before_request():
+    print("before_request is running!")
 
 
 @app.route("/")

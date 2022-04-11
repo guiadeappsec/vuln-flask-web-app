@@ -6,6 +6,30 @@
 * Python 3.7+
 * Docker (if want to run in a container)
 
+
+### Restricting Access (optional)
+
+By default, the api key is set to `None` and any request will be allowed.
+
+If you want to restrict the access to the app, just set the environment variable named `VULN_FLASK_APP_API_KEY` with your secret:
+
+```sh
+export VULN_FLASK_APP_API_KEY=myapisecret
+```
+
+Now, every request should include a cookie named `api_key` with the value of the `VULN_FLASK_APP_API_KEY` environment variable.
+
+```http
+GET / HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: localhost:5000
+...
+
+Cookie: api_key=myapisecret
+
+...
+```
+
 ### Running
 
 #### Run in Docker
