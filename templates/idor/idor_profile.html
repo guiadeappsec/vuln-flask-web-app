@@ -6,7 +6,11 @@
 
   <div class="block">
     <pre>
-        Logged User: {{ user.id }} - {{ user.username }}
+        {% if user is None %}
+          User not found
+        {% else %}
+          Logged User: {{ user.id }} - {{ user.username }}
+        {% endif %}
     </pre>
   </div>
 </section>

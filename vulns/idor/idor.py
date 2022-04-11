@@ -45,7 +45,7 @@ def idor_profile_page(request, app):
     )
 
     if len(db_result) == 0:
-        return render_template('idor/idor_profile.html', not_found=True), 404
+        return render_template('idor/idor_profile.html', user=None), 404
 
     user = list(
         map(
@@ -55,7 +55,7 @@ def idor_profile_page(request, app):
     )[0]
 
     if request.cookies.get('session_token') != user.password:
-        return render_template('idor/idor_profile.html', not_found=True), 404
+        return render_template('idor/idor_profile.html', user=None), 404
 
     return render_template('idor/idor_profile.html', user=user)
 
