@@ -156,7 +156,8 @@ URL: http://localhost:5000/file-upload
 # Command Injection in filename;
 # just submit a file with the name:
 # & touch hacked.txt & 
-os.system(f'convert {temp_upload_file_path} -resize 50% {resized_image_path}')
+command = f'convert "{temp_upload_file_path}" -resize 50% "{resized_image_path}"'
+os.system(command)
 ```
 
 ```py
@@ -168,6 +169,17 @@ def _validate_file(filename):
     extension = os.path.splitext(filename)[1]
     return extension in ALLOWED_EXTENSIONS
 
+```
+
+```py
+# vulns/file_upload/file_upload.py
+
+# It's possible to perform a LFI attack by submitting a file with a path that points to a file outside the web server's root directory.
+# just submit a file with the name:
+# ../../myfile.png
+original_file_name = file.filename
+temp_upload_file_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], original_file_name)
+file.save(temp_upload_file_path)
 ```
 
 ### Insecure Crypto

@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>File Upload Page</h2>
+<h2>File Upload Page</h2>
 
-  <form action="file-upload" method="post" enctype=multipart/form-data>
-    <input class="input" type="file" name="file" id="file">
-    <br />
-    <input class="button is-primary" type="submit" value="Send">
-  </form>
+<form action="file-upload" method="post" enctype=multipart/form-data>
+  <input class="input" type="file" name="file" id="file">
+  <br />
+  <input class="button is-primary" type="submit" value="Send">
+</form>
+
+{% if file_url is not none %}
+  <img src="{{ file_url }}" alt="">
+{% endif %}
+
 {% endblock %}
