@@ -28,15 +28,19 @@ def idor_login_api(request, app):
         )
     )[0]
 
-    resp = make_response(render_template('idor/idor_profile.html', user=user))
+    resp = make_response(redirect(url_for('idor_profile')))
 
     resp.set_cookie('user_id', str(user.id))
     resp.set_cookie('session_token', str(user.password))
 
-    return redirect(url_for('idor_profile'))
+    return resp
 
 
 def idor_profile_page(request, app):
+    if request.cookies.get('session_token') != user.password:
+        return redirect(url_for('idor_login'))
+    
+
     user_id = request.cookies.get('user_id')
 
     db_result = app.db_helper.execute_read(
@@ -53,9 +57,6 @@ def idor_profile_page(request, app):
             db_result
         )
     )[0]
-
-    if request.cookies.get('session_token') != user.password:
-        return render_template('idor/idor_profile.html', user=None), 404
 
     return render_template('idor/idor_profile.html', user=user)
 

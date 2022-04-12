@@ -227,3 +227,38 @@ def path_traversal_image(request, app):
 
     return send_file(image_path)
 ```
+
+
+### IDOR
+
+URL: http://localhost:5000/idor
+
+```py
+# how it works:
+# The user can login at the http://localhost:5000/idor/login.
+# It will set two cookies: user_id and session_token.
+# After the login, the user will be redirected to http://localhost:5000/idor/profile.
+# The profile page will check the cookies and if the user is logged in, it will show the user profile based on its user_id cookie.
+# Try change the user_id cookie to any other user id and see what happens.
+
+# vulns/idor/idor.py
+
+user_id = request.cookies.get('user_id')
+
+db_result = app.db_helper.execute_read(
+    f"SELECT * FROM users WHERE id=:user_id",
+    { 'user_id': user_id }
+)
+
+if len(db_result) == 0:
+    return render_template('idor/idor_profile.html', user=None), 404
+
+user = list(
+    map(
+        lambda u: app.db_models.UserDbModel(u),
+        db_result
+    )
+)[0]
+
+return render_template('idor/idor_profile.html', user=user)
+```
