@@ -7,6 +7,7 @@ from vulns.xssinjection.xss_stored import xss_stored_page, xss_stored_api
 from vulns.ssrf.ssrf import ssrf_page, ssrf_api
 from vulns.path_traversal.path_traversal import path_traversal_page, path_traversal_image
 from vulns.idor.idor import idor_login_page, idor_login_api, idor_profile_page
+from vulns.iframe_injection.iframe_injection import iframe_injection_page
 from util import get_root_dir
 from db_helper import db_helper
 from db_models import db_models
@@ -106,3 +107,8 @@ def idor_login():
 @app.route('/idor/profile', methods=['GET'])
 def idor_profile():
     return idor_profile_page(request, app)
+
+
+@app.route('/iframe-injection', methods=['GET'])
+def iframe_injection():
+    return iframe_injection_page(request, app)

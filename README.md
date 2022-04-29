@@ -274,3 +274,27 @@ user = list(
 
 return render_template('idor/idor_profile.html', user=user)
 ```
+
+### IFrame Injection
+
+URL: http://localhost:5000/iframe-injection?page=/static/pages/about.html
+
+```py
+# The attacker could set the page arg to an evil url and share it with the victim.
+# Just change the URL to: http://localhost:5000/iframe-injection?page=http://example.com
+
+# vulns/iframe_injection/iframe_injection.py
+def iframe_injection_page(request, app):
+    iframe_url = request.args.get('page')
+    return render_template("iframe_injection.html", iframe_url=iframe_url)
+```
+
+```html
+{% extends "base.html" %}
+{% block content %}
+<h2>Iframe Injection</h2>
+
+<iframe src="{{ iframe_url }}" frameborder="0"></iframe>
+
+{% endblock %}
+```
